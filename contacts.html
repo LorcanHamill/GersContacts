@@ -5,15 +5,18 @@
 <title>Contacts</title>
 <style>
 body { font-family: Arial, sans-serif; }
-table { border-collapse: collapse; width: 100%; }
-th, td { border: 1px solid #999; padding: 5px; text-align: left; vertical-align: top;}
 #search { margin-bottom: 10px; padding: 5px; width: 300px; }
+.scrollable { max-height: 600px; overflow: auto; border: 1px solid #999; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #999; padding: 5px; text-align: left; vertical-align: top; }
+th { position: sticky; top: 0; background: #f2f2f2; z-index: 1; }
 .label { font-weight: bold; color: #555; margin-right: 3px; }
 </style>
 </head>
 <body>
 <h1>Contacts</h1>
 <input type="text" id="search" onkeyup="searchTable()" placeholder="Search contacts...">
+<div class="scrollable">
 <table id="contactsTable">
 <tr><th>Name</th><th>Emails</th><th>Phones</th></tr>
 <tr><td></td><td></td><td><a href='tel: --'> --</a></td></tr>
@@ -4595,6 +4598,7 @@ th, td { border: 1px solid #999; padding: 5px; text-align: left; vertical-align:
 <tr><td>Zoran Vukanic</td><td><a href='mailto:zoran.vukanic@thehelix.dcu.ie'>zoran.vukanic@thehelix.dcu.ie</a>, <a href='mailto:zoran.vukanic@dcu.ie'>zoran.vukanic@dcu.ie</a></td><td></td></tr>
 <tr><td></td><td></td><td></td></tr>
 </table>
+</div>
 <script>
 function searchTable() {
     const input = document.getElementById('search');

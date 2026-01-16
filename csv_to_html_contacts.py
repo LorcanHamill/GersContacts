@@ -1,7 +1,7 @@
 import csv
 
-input_csv = "contacts.csv"
-output_html = "contacts.html"
+input_csv = "contacts.csv"      # Your exported Google CSV
+output_html = "contacts.html"   # Output HTML file for GitHub Pages
 
 def get_labeled_columns(row, prefix):
     """
@@ -11,7 +11,6 @@ def get_labeled_columns(row, prefix):
     labeled_values = []
     for key, value in row.items():
         if key.startswith(prefix) and "Value" in key and value:
-            # find corresponding Type column
             num = key.split()[1]  # 'E-mail 1 - Value' -> '1'
             type_key = f"{prefix} {num} - Type"
             label = row.get(type_key, "").strip()
@@ -30,15 +29,18 @@ with open(output_html, 'w', encoding='utf-8') as f:
 <title>Contacts</title>
 <style>
 body { font-family: Arial, sans-serif; }
-table { border-collapse: collapse; width: 100%; }
-th, td { border: 1px solid #999; padding: 5px; text-align: left; vertical-align: top;}
 #search { margin-bottom: 10px; padding: 5px; width: 300px; }
+.scrollable { max-height: 600px; overflow: auto; border: 1px solid #999; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #999; padding: 5px; text-align: left; vertical-align: top; }
+th { position: sticky; top: 0; background: #f2f2f2; z-index: 1; }
 .label { font-weight: bold; color: #555; margin-right: 3px; }
 </style>
 </head>
 <body>
 <h1>Contacts</h1>
 <input type="text" id="search" onkeyup="searchTable()" placeholder="Search contacts...">
+<div class="scrollable">
 <table id="contactsTable">
 <tr><th>Name</th><th>Emails</th><th>Phones</th></tr>
 """)
@@ -64,8 +66,8 @@ th, td { border: 1px solid #999; padding: 5px; text-align: left; vertical-align:
 
         f.write(f"<tr><td>{name}</td><td>{email_links}</td><td>{phone_links}</td></tr>\n")
 
-    # Add JavaScript search/filter
     f.write("""</table>
+</div>
 <script>
 function searchTable() {
     const input = document.getElementById('search');
@@ -89,5 +91,5 @@ function searchTable() {
 </body>
 </html>""")
 
-print(f"Interactive HTML contacts file created: {output_html}")
+print(f"Interactive HTML contacts file with sticky headers created: {output_html}")
 
