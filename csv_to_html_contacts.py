@@ -35,6 +35,9 @@ table { border-collapse: collapse; width: 100%; }
 th, td { border: 1px solid #999; padding: 5px; text-align: left; vertical-align: top; }
 th { position: sticky; top: 0; background: #f2f2f2; z-index: 1; }
 .label { font-weight: bold; color: #555; margin-right: 3px; }
+/* Alternating row colors */
+tr:nth-child(even) { background-color: #f9f9f9; }
+tr:nth-child(odd) { background-color: #ffffff; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@ th { position: sticky; top: 0; background: #f2f2f2; z-index: 1; }
 <input type="text" id="search" onkeyup="searchTable()" placeholder="Search contacts...">
 <div class="scrollable">
 <table id="contactsTable">
-<tr><th>Name</th><th>Emails</th><th>Phones</th></tr>
+<tr><th>Name</th><th>Phones</th><th>Emails</th></tr>
 """)
 
     for row in rows:
@@ -64,7 +67,8 @@ th { position: sticky; top: 0; background: #f2f2f2; z-index: 1; }
             for lbl, val in phones
         )
 
-        f.write(f"<tr><td>{name}</td><td>{email_links}</td><td>{phone_links}</td></tr>\n")
+        # Column order: Name | Phones | Emails
+        f.write(f"<tr><td>{name}</td><td>{phone_links}</td><td>{email_links}</td></tr>\n")
 
     f.write("""</table>
 </div>
@@ -91,5 +95,5 @@ function searchTable() {
 </body>
 </html>""")
 
-print(f"Interactive HTML contacts file with sticky headers created: {output_html}")
+print(f"Interactive HTML contacts file with sticky headers, alternating row colors, and swapped columns created: {output_html}")
 
