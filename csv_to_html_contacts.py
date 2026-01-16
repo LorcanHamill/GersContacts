@@ -1,7 +1,7 @@
 import csv
 
 input_csv = "contacts.csv"      # Your exported Google CSV
-output_html = "contacts.html"   # Output HTML file for GitHub Pages
+output_html = "index.html"      # <-- Default page for GitHub Pages
 
 def get_labeled_columns(row, prefix):
     """
@@ -95,5 +95,5 @@ function searchTable() {
 </body>
 </html>""")
 
-print(f"Interactive HTML contacts file with sticky headers, alternating row colors, and swapped columns created: {output_html}")
+print(f"Interactive HTML contacts page created: {output_html}")
 
